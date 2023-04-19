@@ -2,8 +2,9 @@
 
 namespace Dewsign\NovaBlog\Policies;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 class BlogPolicy
 {
@@ -44,7 +45,7 @@ class BlogPolicy
         return $user->can('manageBlog', $model);
     }
 
-    public function viewInactive($user = null, $model)
+    public function viewInactive(?Authenticatable $user, $model)
     {
         if (config('maxfactor-support.canViewInactive')) {
             return true;
